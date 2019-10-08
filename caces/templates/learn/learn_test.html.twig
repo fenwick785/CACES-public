@@ -1,0 +1,67 @@
+{% extends "base.html.twig" %}
+
+{% block color %}learn-color{% endblock %}
+
+{% block title %}
+<a href="{{path("lesson", {'id':learn[0].learnTheme})}}"><i class="fas fa-arrow-left text-white"></i></a>
+Test {% endblock %}
+
+
+
+{% block content %}
+
+{% for l in learn %}
+
+
+
+
+<div>
+  <img src="{{l.picture}}" alt="" class="w-100 mb-2">
+        <p>{{l.question}}</p>
+
+        <small>
+          id de la question : {{l.id}}
+          <br>
+          learnTheme : {{l.learnTheme}}
+        </small>
+
+
+<form action="" method="POST">
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="answer" id="exampleRadios1" value="1" checked>
+        <label class="form-check-label" for="exampleRadios1">
+          Vrai
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="answer" id="exampleRadios2" value="0">
+        <label class="form-check-label" for="exampleRadios2">
+          Faux
+        </label>
+      </div>
+
+      <input type="submit" class="btn btn-success" value="Valider la réponse">
+
+</form>
+
+
+
+
+    </div>
+    <hr>
+    
+{% endfor %}
+
+<small class="d-flex justify-content-center">
+    <div class="pagination mw-100">
+        {{ knp_pagination_render(learn) }}
+      </div>
+
+</small>
+
+<!-- 
+<a class="btn btn-success btn-lg col-md-4 offset-md-4" onclick="confirm('Etes-vous sûr de vouloir valider toutes vos réponses ?')" href="{{path('learn')}}" role="button">Je valide mes réponses</a> -->
+
+
+{% endblock %}

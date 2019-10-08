@@ -1,0 +1,358 @@
+{% extends 'base.html.twig' %}
+
+{% block color %}learn-color{% endblock %}
+
+{% block color2 %}fond-principal{% endblock %}
+
+{% block learn_color %}learn-color{% endblock %}
+
+{% block title %}
+    <a href="{{path("home")}}"><i class="fas fa-arrow-left text-white"></i></a>
+    J'apprends
+{% endblock %}
+
+
+
+{% block content %}
+
+{# <pre>
+    {{ dump(learnState) }}
+</pre> #}
+
+
+{# création des variables a vide #}
+{% set chap1 = 0 %}
+{% set chap2 = 0 %}
+{% set chap3 = 0 %}
+{% set chap4 = 0 %}
+{% set chap5 = 0 %}
+{% set chap6 = 0 %}
+{% set chap7 = 0 %}
+
+
+
+{# cette suite de code permet de connaitre en %, notre avancé dans le chapitre 1 selon le nombre de leçon(s) comprise(s) #}
+{% for ls in learnState %}
+    {% if ls.idLesson.chapter == 1 %}
+    {% set chap1 = chap1 + 1 %}
+    {% endif %}
+{% endfor %}
+{% set chap1 = (chap1 / 5) * 100 %}
+{# si nous avons compris 3 leçon sur 5 présente dans le chapitre 1 alors la variable chap1 = (3/5)x100 => 60 #}
+{# nous avons donc compris 60% du contenu présent dans le chapitre 1 #}
+
+
+
+
+
+{% for ls in learnState %}
+    {% if ls.idLesson.chapter == 2 %}
+    {% set chap2 = chap2 + 1 %}
+
+    {% endif %}
+{% endfor %}
+{% set chap2 = (chap2 / 2) * 100 %}
+
+
+   
+    
+{% for ls in learnState %}
+{% if ls.idLesson.chapter == 3 %}
+{% set chap3 = chap3 + 1 %}
+
+{% endif %}
+{% endfor %}
+{% set chap3 = (chap3 / 6) * 100 %}
+
+
+
+
+{% for ls in learnState %}
+    {% if ls.idLesson.chapter == 4 %}
+    {% set chap4 = chap4 + 1 %}
+
+    {% endif %}
+{% endfor %}
+{% set chap4 = (chap4 / 2) * 100 %}
+
+
+
+
+{% for ls in learnState %}
+    {% if ls.idLesson.chapter == 5 %}
+    {% set chap5 = chap5 + 1 %}
+    {% endif %}
+{% endfor %}
+{% set chap5 = (chap5 / 3) * 100 %}
+
+
+
+{% for ls in learnState %}
+    {% if ls.idLesson.chapter == 6 %}
+    {% set chap6 = chap6 + 1 %}
+    {% endif %}
+{% endfor %}
+{% set chap6 = (chap6 / 10) * 100 %}
+
+
+
+
+{% for ls in learnState %}
+    {% if ls.idLesson.chapter == 7 %}
+    {% set chap7 = chap7 + 1 %}
+    {% endif %}
+{% endfor %}
+{% set chap7 = (chap7 / 2) * 100 %}
+
+    
+
+
+
+
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+{# Si l'utilisateur est connecté, on note la progression en cours avec une progress-bar en dessous chaque chapitre #}
+
+
+<a href="{{path("learn_chap1")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+            1 - Connaissances générales
+            <div class="progress">
+                <div class="progress-bar 
+                {% if chap1 > 75 %}
+                {# si nous avons compris plus de 75% du contenu présent dans le chapitre 1 alors la barre de progression sera verte  #}
+                bg-success
+                {% endif %}
+                {% if chap1 > 30 and chap1 <= 75 %}
+                {# si nous avons compris entre 30 et 75% du contenu présent dans le chapitre 1 alors la barre de progression sera jaune  #}
+                bg-warning
+                {% endif %}
+                {% if chap1 >= 0 and chap1 <= 30 %}
+                {# si nous avons compris moins de 30% du contenu présent dans le chapitre 1 alors la barre de progression sera rouge  #}
+                bg-danger
+                {% endif %}
+                " role="progressbar" style="width: {{chap1}}%" aria-valuenow="{{chap1}}" aria-valuemin="0" aria-valuemax="100"></div>
+                {# l'avancé de la progress-bar est faite en fonction de notre variable "chap1" qui est en % #}
+              </div>
+        
+        </div>
+        </a>    
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap2")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+            2 – Les principaux types d’engins de chantier
+            <div class="progress">
+                <div class="progress-bar 
+                {% if chap2 > 75 %}
+                bg-success
+                {% endif %}
+                {% if chap2 > 30 and chap2 <= 75 %}
+                bg-warning
+                {% endif %}
+                {% if chap2 >= 0 and chap2 <= 30 %}
+                bg-danger
+                {% endif %}
+                " role="progressbar" style="width: {{chap2}}%" aria-valuenow="{{chap2}}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+        
+        </div>
+        </a>
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap3")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+            3 – Technologie des engins de chantier
+            <div class="progress">
+                <div class="progress-bar 
+                {% if chap3 > 75 %}
+                bg-success
+                {% endif %}
+                {% if chap3 > 30 and chap3 <= 75 %}
+                bg-warning
+                {% endif %}
+                {% if chap3 >= 0 and chap3 <= 30 %}
+                bg-danger
+                {% endif %}
+                " role="progressbar" style="width: {{chap3}}%" aria-valuenow="{{chap3}}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+        </div>
+        </a>    
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap4")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+        4 – Risques liés à l’utilisation des engins de chantier 
+        <div class="progress">
+            <div class="progress-bar 
+            {% if chap4 > 75 %}
+            bg-success
+            {% endif %}
+            {% if chap4 > 30 and chap4 <= 75 %}
+            bg-warning
+            {% endif %}
+            {% if chap4 >= 0 and chap4 <= 30 %}
+            bg-danger
+            {% endif %}
+            " role="progressbar" style="width: {{chap4}}%" aria-valuenow="{{chap4}}" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+        </div>
+        </a>
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap5")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+         5 – Règles de circulation applicables aux engins de chantier 
+         <div class="progress">
+            <div class="progress-bar 
+            {% if chap5 > 75 %}
+            bg-success
+            {% endif %}
+            {% if chap5 > 30 and chap5 <= 75 %}
+            bg-warning
+            {% endif %}
+            {% if chap5 >= 0 and chap5 <= 30 %}
+            bg-danger
+            {% endif %}
+            " role="progressbar" style="width: {{chap5}}%" aria-valuenow="{{chap5}}" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+        </div>
+        </a>
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap6")}}">
+            <div class="col-md-4 offset-md-4 btn learn-color text-white">
+                
+         6 – Exploitation des engins de chantier 
+         <div class="progress">
+            <div class="progress-bar 
+            {% if chap6 > 75 %}
+            bg-success
+            {% endif %}
+            {% if chap6 > 30 and chap6 <= 75 %}
+            bg-warning
+            {% endif %}
+            {% if chap6 >= 0 and chap6 <= 30 %}
+            bg-danger
+            {% endif %}
+            " role="progressbar" style="width: {{chap6}}%" aria-valuenow="{{chap6}}" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+            </div>
+            </a>
+                
+        <br><br>
+
+        <a href="{{path("learn_chap7")}}">
+            <div class="col-md-4 offset-md-4 btn learn-color text-white">
+                
+         7 – Vérification d’usage des engins de chantier 
+         <div class="progress">
+            <div class="progress-bar 
+            {% if chap7 > 75 %}
+            bg-success
+            {% endif %}
+            {% if chap7 > 30 and chap7 <= 75 %}
+            bg-warning
+            {% endif %}
+            {% if chap7 >= 0 and chap7 <= 30 %}
+            bg-danger
+            {% endif %}
+            " role="progressbar" style="width: {{chap7}}%" aria-valuenow="{{chap7}}" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+            </div>
+        </a>
+                        
+<br><br>
+
+    {% else %}
+    {# si l'utilisateur n'est pas connecté: menu simple sans progress-bar #}
+                            
+    <a href="{{path("learn_chap1")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+            1 - Connaissances générales
+
+        </div>
+        </a>    
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap2")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+            2 – Les principaux types d’engins de chantier
+
+        </div>
+        </a>
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap3")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+            3 – Technologie des engins de chantier
+
+        </div>
+        </a>    
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap4")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+        4 – Risques liés à l’utilisation des engins de chantier 
+
+        </div>
+        </a>
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap5")}}">
+        <div class="col-md-4 offset-md-4 btn learn-color text-white">
+            
+         5 – Règles de circulation applicables aux engins de chantier 
+
+        </div>
+        </a>
+        
+        <br><br>
+        
+        <a href="{{path("learn_chap6")}}">
+            <div class="col-md-4 offset-md-4 btn learn-color text-white">
+                
+         6 – Exploitation des engins de chantier 
+
+            </div>
+            </a>
+                
+        <br><br>
+
+        <a href="{{path("learn_chap7")}}">
+            <div class="col-md-4 offset-md-4 btn learn-color text-white">
+                
+         7 – Vérification d’usage des engins de chantier 
+
+            </div>
+        </a>
+                        
+<br><br>
+
+
+
+    {% endif %}
+{% endblock %}

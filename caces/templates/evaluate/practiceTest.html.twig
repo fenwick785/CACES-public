@@ -1,0 +1,147 @@
+{% extends "base.html.twig" %}
+
+{% block color %}evaluate-color{% endblock %}
+
+{% block title %}
+<a href="{{path("evaluate")}}"><i class="fas fa-arrow-left text-white"></i></a>
+Examen Blanc{% endblock %}
+
+{% block content %}
+<h1>1/ Connaissances générales</h1>
+<small>(12 questions)</small>
+<br><br>
+<form action="">
+
+
+{% for q1 in question1 %}
+
+    <div>
+        <p>{{q1.question}}</p>
+
+        <div class="d-flex justify-content-around">
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+            <label class="form-check-label" for="inlineRadio1">Vrai</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
+            <label class="form-check-label" for="inlineRadio2">Faux</label>
+          </div>
+
+        </div>
+
+    </div>
+    <hr>
+
+{% endfor %}
+
+<br>
+<h1>2/ Technologie et stabilité des engins de chantier</h1>
+<small>(28 questions)</small>
+<br><br>
+
+{% for q2 in question2 %}
+<div>
+    <p>{{q2.question}}</p>
+
+    <div class="d-flex justify-content-around">
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+        <label class="form-check-label" for="inlineRadio1">Vrai</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
+        <label class="form-check-label" for="inlineRadio2">Faux</label>
+      </div>
+
+    </div>
+
+</div>
+<hr>
+{% endfor %}
+<br>
+
+
+<h1>3/ Exploitation des engins de chantiers</h1>
+<small>(44 questions)</small>
+<br><br>
+
+{% for q3 in question3 %}
+<div>
+    <p>{{q3.question}}</p>
+
+    <div class="d-flex justify-content-around">
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+        <label class="form-check-label" for="inlineRadio1">Vrai</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
+        <label class="form-check-label" for="inlineRadio2">Faux</label>
+      </div>
+
+    </div>
+
+</div>
+<hr>
+{% endfor %}
+<br>
+
+
+<h1>4/ Circulation des engins de chantier</h1>
+<small>(12 questions)</small>
+<br><br>
+
+{% for q4 in question4 %}
+
+    <p>{{q4.question}}</p>
+
+    <div class="d-flex justify-content-around">
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+        <label class="form-check-label" for="inlineRadio1">Vrai</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
+        <label class="form-check-label" for="inlineRadio2">Faux</label>
+      </div>
+
+    </div>
+
+<hr>
+{% endfor %}
+<br>
+
+<h1>5/ Fin de poste</h1>
+<small>(4 questions)</small>
+<br><br>
+
+{% for q5 in question5 %}
+<div>
+    <p>{{q5.question}}</p>
+
+    <div class="d-flex justify-content-around">
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+        <label class="form-check-label" for="inlineRadio1">Vrai</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
+        <label class="form-check-label" for="inlineRadio2">Faux</label>
+      </div>
+
+    </div>
+
+</div>
+<hr>
+{% endfor %}
+
+<a class="btn col-md-4 offset-md-4 btn-success btn-lg" type="submit" href="#" role="button">Valider mes réponses</a>
+</form>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block color %}learn-color{% endblock %}
+
+{% block learn_color %}learn-color{% endblock %}
+
+
+{% block title %}
+    <a href="{{path("learn")}}"><i class="fas fa-arrow-left text-white"></i></a>
+    J'apprends -> chapitre 2
+{% endblock %}
+
+
+
+{% block content %}
+
+        
+{% for l in lesson %}
+{% set e = false %}
+{% for ul in userLessonComprise %}
+{% if l.id == ul.idLesson.id and ul.state == 'comprises' %} 
+{% set e = true %}
+<a href="{{path('lesson', {'id': l.id})}}">
+    <div class="col-md-4 offset-md-4 d-flex btn learn-color text-white mb-2">
+        <div class="w-75">
+        {{l.part}} - {{l.title}} </div>
+        <div class="w-25 d-flex justify-content-end align-items-center">
+        <i class="far fa-check-circle border bg-white rounded-circle text-success" style="font-size: 1.7em;"></i></div>
+    </div>
+    </a>  
+
+{% endif %}
+{% if l.id == ul.idLesson.id and ul.state == 'non comprises' %}
+{% set e = true %}
+<a href="{{path('lesson', {'id': l.id})}}">
+    <div class="col-md-4 offset-md-4 btn d-flex learn-color text-white mb-2">
+        <div class="w-75">
+            {{l.part}} - {{l.title}} </div>
+            <div class="w-25 d-flex justify-content-end align-items-center">
+         <i class="far text-danger border bg-white rounded-circle fa-times-circle mr-0" style="font-size: 1.7em;"></i></div>
+    </div>
+    </a>   
+
+{% endif %}
+
+{% endfor %}
+{% if e == false %}
+<a href="{{path('lesson', {'id': l.id})}}">
+    <div class="col-md-4 offset-md-4 btn learn-color text-white mb-2">
+        {{l.part}} - {{l.title}}
+    </div>
+    </a> 
+{% endif %}
+
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block color %}evaluate-color{% endblock %}
+
+{% block evaluate_color %}evaluate-color{% endblock %}
+
+{% block title %}
+    <a href="{{path("home")}}"><i class="fas fa-arrow-left text-white"></i></a>
+    Je m'évalue
+{% endblock %}
+
+{% block content %}
+
+<h3>Introduction</h3>
+<hr>
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore vero amet culpa possimus architecto suscipit repellendus facere inventore sint! Sequi, optio aliquid assumenda repellat laboriosam illum fugiat! Vitae, molestiae dignissimos. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit eum laboriosam, libero eos tempore ea fugiat ullam, magni, iure eaque laudantium quasi animi ipsam sint consectetur iusto unde placeat accusantium.</p>
+
+<a class="btn btn-lg btn-warning col-md-4 offset-md-4" href="{{path("evaluate_test")}}" role="button">Lancer le l'examen blanc !</a>
+
+	
+<!-- {{ dump(question1) }}
+{{ dump(question2) }}
+{{ dump(question3) }}
+{{ dump(question4) }}
+{{ dump(question5) }} -->
+
+{% endblock %}

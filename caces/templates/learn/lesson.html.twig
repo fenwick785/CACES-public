@@ -1,0 +1,93 @@
+{% extends "base.html.twig" %}
+
+{% block color %}learn-color{% endblock %}
+
+{% block title %}
+<a href="{{path("learn")}}"><i class="fas fa-arrow-left text-white"></i></a>
+{{lesson.title}}{% endblock %}
+
+{% block content %}
+
+<div class="pt-4 p-1">
+<h5 class="mt- mb-1">Chapitre {{lesson.chapter}} / Partie {{lesson.part}}</h3>
+</div>
+{% if lesson.video %}
+<iframe width="100%" class="mb-1" height="" src="{{lesson.video}}" frameborder="0" allow="" allowfullscreen></iframe>
+    
+{% endif %}
+
+<div class="h5">
+    {{lesson.T1}}
+</div>
+<p>
+    {{lesson.P1}}
+</p>
+
+{% if lesson.T2 %}
+<hr>
+<div class="h5">
+    {{lesson.T2}}
+</div>
+<p>
+    {{lesson.P2}}
+</p>
+{% endif %}
+
+{% if lesson.T3 %}
+<hr>
+<div class="h5">
+    {{lesson.T3}}
+</div>
+<p>
+    {{lesson.P3}}
+</p>
+{% endif %}
+
+
+{% set compris = false %}
+{% set nonCompris = false %}
+
+{% for ul in userLesson %}
+    {% if ul.idLesson.id == lesson.id and ul.state == 'comprises' %}
+        {% set compris = true %}
+    {% endif %}
+    {% if ul.idLesson.id == lesson.id and ul.state == 'non comprises' %}
+        {% set nonCompris = true %}
+    {% endif %}  
+{% endfor %}
+
+
+<a class="btn btn-warning mt-2 col-md-4 offset-md-4" href="{{path('learn_test', {'id': lesson.idLesson})}}" role="button">Lancer le test !</a>
+<hr>
+
+
+{% if compris == true %}
+
+    <a class="btn btn-secondary mt-2 col-md-4 offset-md-4" href="{{ path('learn_remove_list',{'id': lesson.idLesson, 'state':'comprises'}) }}" role="button">Retirer de la liste des leçons comprises</a>
+
+{% else %}
+
+    <a class="btn btn-success mt-2 col-md-4 offset-md-4" href="{{ path('learn_finish',{'id': lesson.idLesson, 'state':'comprises'}) }}" role="button">J'ai compris cette leçon</a>
+
+{% endif %}
+
+
+
+
+{% if nonCompris == true %}
+
+    <a class="btn btn-secondary mt-2 col-md-4 offset-md-4" href="{{ path('learn_remove_list',{'id': lesson.idLesson, 'state':'non comprises'}) }}" role="button">Retirer de la liste des leçons non comprises</a>
+
+{% else %}
+
+    <a class="btn btn-danger mt-2 col-md-4 offset-md-4" href="{{ path('learn_finish',{'id': lesson.idLesson, 'state':'non comprises'}) }}" role="button">Je n'ai pas compris cette leçon</a>
+
+{% endif %}
+
+
+
+
+
+ {{dump(userLesson)}} 
+
+{% endblock %}

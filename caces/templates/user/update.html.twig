@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+
+{% block color %}user-color{% endblock %}
+
+{% block title %}
+    <a href="{{path("profil")}}"><i class="fas fa-arrow-left text-white"></i></a>
+    Modifier le profile
+{% endblock %}
+
+{% block content %}
+
+{{ form_start(userForm) }}
+
+<div class="">
+    <div class="row mt-2">
+        <div class="col-6">{{ form_label(userForm.firstName) }}</div > 
+        <div class="col-6"> {{ form_label(userForm.lastName) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-danger">{{ form_errors(userForm.firstName) }}</div>
+        <div class="col-6 text-danger">{{ form_errors(userForm.lastName) }}</div> 
+
+        
+    </div>
+    <div class="row">
+        <div class="col-6">{{ form_widget(userForm.firstName) }}</div>
+        <div class="col-6">{{ form_widget(userForm.lastName) }}</div> 
+    </div>
+
+
+    <div class="row mt-2">
+        <div class="col-6">{{ form_label(userForm.email) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-danger">{{ form_errors(userForm.email) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-6">{{ form_widget(userForm.email) }}</div>
+    </div>
+
+
+    {# <div class="row mt-2">
+        <div class="col-6">{{ form_label(userForm.password.first) }}</div>
+        <div class="col-6">{{ form_label(userForm.password.second) }}</div> 
+    </div>
+    <div class="row">
+        <div class="col-6 text-danger">{{ form_errors(userForm.password.first) }}</div>
+        <div class="col-6 text-danger">{{ form_errors(userForm.password.second) }}</div> 
+    </div>
+    <div class="row">
+        <div class="col-6">{{ form_widget(userForm.password.first) }}</div>
+        <div class="col-6">{{ form_widget(userForm.password.second) }}</div> 
+    </div> #}
+
+
+    <div class="row mt-2">
+        <div class="col-12">{{ form_label(userForm.question) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-12">{{ form_widget(userForm.question) }}</div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center mt-4 text-center">
+            {{form_row(userForm.submit)}}
+        </div>
+    </div>
+</div>
+            
+    {{ form_end(userForm) }}
+
+
+{% endblock %}

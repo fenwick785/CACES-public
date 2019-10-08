@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+<a href="{{path("home")}}"><i class="fas fa-arrow-left text-white"></i></a>
+{{app.user.firstName}} {{app.user.lastName}}
+{% endblock %}
+
+{% block color %}user-color{% endblock %}
+
+{% block content %}
+
+
+<a href="{{path("profil_update")}}" type="button" class="btn btn-primary col-md-4 offset-md-4 mb-3">Modifier votre profil</a>
+
+
+<h6 class="text-center bg-success p-3 text-white" data-toggle="collapse" data-target="#collapsefinish" aria-expanded="false" aria-controls="collapsefinish" type="button">
+    Votre liste de leçon(s) terminée(s)<i class="fas fa-caret-down float-right"></i>
+</h6>
+<div class="collapse" id="collapsefinish">
+    <div class="d-flex flex-wrap justify-content-center">
+
+    {% for ul in app.user.userLessons if ul.state == 'comprises' %}
+
+
+<a class="btn btn-success border border-dark mb-1 mx-1" href="{{path('lesson', {'id': ul.idLesson.id } ) }}" role="button">
+    Chap {{ul.idLesson.chapter}}.{{ul.idLesson.part}}
+
+</a>
+
+<!-- <pre>
+    {{ dump(ul.idLesson) }}
+</pre> -->
+    
+{% endfor %}
+</div>
+</div>
+
+
+
+
+<h6 class="text-center bg-danger p-3 text-white mt-3" data-toggle="collapse" data-target="#collapsewish" aria-expanded="false" aria-controls="collapsewish" type="button">
+        Votre liste de leçon(s) à revoir<i class="fas fa-caret-down float-right"></i>
+    </h6>
+   <div class="collapse" id="collapsewish">
+<div class="d-flex justify-content-center flex-wrap">
+
+
+
+{% for ul in app.user.userLessons if ul.state == 'non comprises' %}
+
+<a class="btn btn-danger border border-dark mb-1 mx-1" href="{{ path('lesson', {'id': ul.idLesson.id } ) }}" role="button">
+    Chap {{ul.idLesson.chapter}}.{{ul.idLesson.part}}
+</a>
+
+    
+{% endfor %}
+</div>
+</div>
+
+
+{% endblock %}

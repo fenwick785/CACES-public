@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{# <a href="#"><i class="fas fa-arrow-left text-white"></i></a> #}
+Accueil
+{% endblock %}
+
+{% block color %}fond-principal{% endblock %}
+
+{% block color2 %}fond-principal{% endblock %}
+
+
+{% block content %}
+
+    <h3>Introduction</h3>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quae ducimus dolor harum nihil distinctio aliquam, culpa ab, amet odio vitae tenetur maxime. Laboriosam dolorum, deleniti saepe autem numquam porro.
+    Quo modi necessitatibus numquam, architecto voluptatem possimus ea! Exercitationem deleniti temporibus sed deserunt, a eius.</p>
+
+<!-- Menu principal -->
+
+
+<a href="{{path("learn")}}">
+<div class="col-md-4 offset-md-4 btn learn-color text-white">
+    <i class="fas fa-book-open "></i>
+    J'apprends</div>
+</a>    
+
+<br><br>
+
+<a href="{{path("evaluate")}}">
+<div class="col-md-4 offset-md-4 btn evaluate-color text-white">
+    <i class="fas fa-bookmark"></i>
+    Je m'évalue</div>
+</a>
+
+<br><br>
+
+<a href="{{path("news")}}">
+<div class="col-md-4 offset-md-4 btn news-color text-white">
+    <i class="far fa-newspaper"></i>
+    Actualité</div>
+</a>    
+
+<br><br>
+
+<a href="{{path("unit")}}">
+<div class="col-md-4 offset-md-4 btn unit-color text-white">
+    <i class="far fa-compass"></i>
+    Centres d'examens
+</div>
+</a>
+
+<br><br>
+
+
+    
+
+
+<a href="
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{{path("profil")}}
+{% else %}
+{{path('app_login')}}
+{% endif %}
+">
+<div class="col-md-4 offset-md-4 btn user-color text-white">
+    <i class="far fa-user"></i>
+    Profil
+</div>
+</a>
+
+<br><br>
+
+
+
+{% endblock %}

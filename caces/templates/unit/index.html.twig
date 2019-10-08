@@ -1,0 +1,226 @@
+{% extends 'base.html.twig' %}
+
+
+{% block color %}unit-color{% endblock %}
+
+{% block unit_color %}unit-color{% endblock %}
+
+{% block title %}
+<a href="{{path("home")}}"><i class="fas fa-arrow-left text-white"></i></a>
+Centres d'examens
+{% endblock %}
+
+
+{% block content %}
+
+<!-- librairie CSS : https://leafletjs.com/examples/quick-start/ -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+
+<style>
+    #myMap{
+        height: 85vh;
+    }
+</style>
+
+<div id="myMap"></div>
+
+
+<!-- librairie JS : https://leafletjs.com/examples/quick-start/ -->
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+
+
+
+   <script>
+
+   //https://nouvelle-techno.fr/actualites/2018/05/11/pas-a-pas-inserer-une-carte-openstreetmap-sur-votre-site
+
+// on créé un tableau avec tous nos centres de où l'on peut passer le CACES. Avec le format suivant :
+        // "{Nom du centre}" : {
+        //     "lat": {lattitude}, la lattitude et la longitude peuvent être connue sur google map en tapant l'adresse du centre
+        //     "lon": {longitude},
+        //     "adresse": "{adresse du centre}",
+        //     "site": "{l'URL du site}",
+        //     "tel": "{le numéro de téléphone}",
+        // },
+
+    var villes = {
+        "AFNOR Certification" : { 
+            "lat": 48.920042, 
+            "lon": 2.361345, 
+            "adresse": "11, rue Francis de Pressensé 93571 La Plaine Saint-Denis CEDEX", 
+            "site": "https://certification.afnor.org/services/certification-de-testeurs-caces", 
+            "tel": "01 41 62 80 00"},
+
+        "BUREAU VERITAS Certification" : { 
+            "lat": 48.888104, 
+            "lon": 2.233158, 
+            "adresse": "Le Guillaumet 60, avenue du Général de Gaulle Puteaux 92046 Paris La Défense CEDEX", 
+            "site": "https://www.bureauveritas.fr/services+sheet/certification-caces-organisme-testeur", 
+            "tel": "01 41 97 00 60"},
+
+        "DEKRA Certification SAS" : { 
+            "lat": 48.799328, 
+            "lon": 2.302407, 
+            "adresse": "5 avenue Garlande 92220 Bagneux", 
+            "site": "https://www.dekra-certification.fr/certification-de-systemes/la-certification-caces-dekra-certification.html", 
+            "tel": "01 41 17 11 25"},
+
+        "GLOBAL Certification®" : { 
+            "lat": 48.762759, 
+            "lon": 2.361221, 
+            "adresse": "14 rue du Séminaire 94516 Rungis", 
+            "site": "https://www.global-certification.fr/certification", 
+            "tel": "01 49 78 23 24"},
+
+        "SGS-ICS" : { 
+            "lat": 48.809172, 
+            "lon": 2.327062, 
+            "adresse": "29 avenue Aristide Briand 94111 Arcueil cedex", 
+            "site": "https://www.sgsgroup.fr/fr-fr/industrial-manufacturing/services-related-to-logistics/caces-testing-certification", 
+            "tel": "01 41 24 83 02"},
+
+        "ACTION FORMATION CONTROLES" : { 
+            "lat": 48.641133, 
+            "lon": 2.413264, 
+            "adresse": "11 rue de Strasbourg 91130 RIS ORANGIS", 
+            "site": "http://www.inrs.fr/publications/bdd/caces/etablissement.html?refINRS=EtablissementCaces_42512", 
+            "tel": "01 69 06 78 19"},
+
+        "AFTRAL" : { 
+            "lat": 48.619210, 
+            "lon": 2.334978, 
+            "adresse": "Chemin de la Noue Rousseau 91220 LE PLESSIS PATE", 
+            "site": "https://www.aftral.com", 
+            "tel": "01 49 78 21 79"},
+
+        "AFTRAL" : { 
+            "lat": 48.764688, 
+            "lon": 2.359473, 
+            "adresse": "11, place d'Aquitaine BP 475 94152 RUNGIS CEDEX", 
+            "site": "https://www.aftral.com", 
+            "tel": "01 49 78 21 95"},
+
+        "AFTRAL" : { 
+            "lat": 48.883342, 
+            "lon": 2.308135, 
+            "adresse": "46, avenue de Villiers 75847 PARIS CEDEX 17", 
+            "site": "https://www.aftral.com", 
+            "tel": "01 49 78 21 95"},
+
+        "AFTRAL" : { 
+            "lat": 48.941060, 
+            "lon": 2.294533, 
+            "adresse": "11, route Principale du Port 92230 GENNEVILLIERS", 
+            "site": "https://www.aftral.com", 
+            "tel": "01 41 47 97 00"},
+
+        "ASSOCIATION GROUPE ELIT" : { 
+            "lat": 48.877994, 
+            "lon": 2.232136, 
+            "adresse": "50, Rue Rouget de Lisle 92150 SURESNES", 
+            "site": "http://www.groupe-elit.com/", 
+            "tel": "01 40 99 83 65"},
+
+        "ASSOCIATION GROUPE ELIT" : { 
+            "lat": 48.877994, 
+            "lon": 2.232136, 
+            "adresse": "50, Rue Rouget de Lisle 92150 SURESNES", 
+            "site": "http://www.groupe-elit.com/", 
+            "tel": "01 40 99 83 65"},
+
+        "EUROVIA ACADEMY FRANCE" : { 
+            "lat": 48.888996, 
+            "lon": 2.168301, 
+            "adresse": "18, place de l'Europe 92565 RUEIL MALMAISON", 
+            "site": "http://www.inrs.fr/publications/bdd/caces/etablissement.html?refINRS=EtablissementCaces_43925", 
+            "tel": "05 56 12 49 30"},
+
+        "FORGET FORMATION II" : { 
+            "lat": 48.729545, 
+            "lon": 2.434645, 
+            "adresse": "Rue Carrières des Morillons Zi - BP 23 94290 VILLENEUVE LE ROI", 
+            "site": "https://www.forget-formation.com", 
+            "tel": "01 49 60 20 70"},
+
+        "IXIO" : { 
+            "lat": 48.830441, 
+            "lon": 2.339884, 
+            "adresse": "12 Rue de CABANIS 75014 PARIS", 
+            "site": "http://www.ixio.fr", 
+            "tel": "01 53 34 33 40"},
+
+        "CAT INDUSTRIE" : { 
+            "lat": 48.766344, 
+            "lon": 2.687233, 
+            "adresse": "7, Rue Robert SCHUMAN 77330 OZOIR LA FERRIERE", 
+            "site": "http://www.inrs.fr/publications/bdd/caces/etablissement.html?refINRS=EtablissementCaces_43646", 
+            "tel": "09 62 10 66 96"},
+
+        "CPO FC" : { 
+            "lat": 48.766336, 
+            "lon": 1.999651, 
+            "adresse": "13, rue Denis Papin BP 55 78193 TRAPPES cedex", 
+            "site": "https://www.cpo-fc.com", 
+            "tel": "01 85 40 02 71"},
+
+        "ECF EFR" : { 
+            "lat": 48.964481, 
+            "lon": 2.054995, 
+            "adresse": "ZI du chemin neuf 3 rue des Bauches 78260 ACHERES", 
+            "site": "http://www.efr.fr/", 
+            "tel": "01 77 45 67 42"},
+
+        "ELIT - B.S.C CARRASCO" : { 
+            "lat": 48.408946, 
+            "lon": 3.251198, 
+            "adresse": "ZI 15 Rue Albert Einstein 77480 BRAY SUR SEINE", 
+            "site": "http://www.groupe-elit.com/", 
+            "tel": "01 60 67 20 88"},
+
+        "LEVAGE MANUTENTION FORMATION" : { 
+            "lat": 48.989656, 
+            "lon": 1.771120, 
+            "adresse": "RD 190 Route de Meulan 78440 GUITRANCOURT", 
+            "site": "http://www.lmf.fr/", 
+            "tel": "01 34 78 44 00"},
+
+        "SOCOTEC FORMATION" : { 
+            "lat": 48.786503, 
+            "lon": 2.052694, 
+            "adresse": "5, place des Fréres Montgolfiers 78280 Guyancourt", 
+            "site": "http://www.formation-socotec.fr/", 
+            "tel": "01 30 12 80 00"},
+    }
+
+    // initialisation de la Map
+    var mymap = L.map('myMap').setView([48.852969, 2.349903], 11);
+    // Ici on pointe directement sur Paris
+
+    // Chargement des tuiles
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        attribution: 'données <a href="osm.org/copyright">OpenStreetMap</a>/ODbl - rendu <a href="//openstreetmap.fr">OSM France</a>',
+        //correspond au zoom maximal et minimal
+        minZoom:1,
+        maxZoom:20
+    }).addTo(mymap);
+
+
+// ici on boucle notre tableau "villes" qui contient tout les centres de formation avec leurs informations
+    for(ville in villes){
+        var marqueur = L.marker([villes[ville].lat, villes[ville].lon]).addTo(mymap);
+    marqueur.bindPopup("<h5>"+ville+"</h5><hr><ul><li>Adresse: "+villes[ville].adresse+"</li><li>Site Web: <a href='"+villes[ville].site+"'> cliquer ici <a/></li><li>Telephone: "+villes[ville].tel+"</li></ul>")
+    }
+
+    
+
+   
+   </script>
+
+
+
+{% endblock %}

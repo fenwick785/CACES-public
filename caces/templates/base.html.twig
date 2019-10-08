@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+<title>CACES</title>
+</head>
+<body>
+    <div class="container">
+    <header class="fixed-top 
+    {% block color %}
+    
+    {% endblock %} text-white"  >
+    <!-- block color -> bloc dans lequel on met la couleur que l'on souhaite sur le bandeau en haut de page -->
+        <div class="pl-2 py-2 d-flex">
+            {% block title %}
+            <!-- bloc dans lequel on peut insérer le titre de la page -->
+            {% endblock %}
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {# si on est connecté, le bouton deconnexion est présent #}
+
+            <div class="ml-auto pr-2">
+                <a href="{{path("app_logout")}}" class="text-white">
+            <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+
+            {% endif %}
+
+        </div>
+    </header>
+    
+    <div class="my-5">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center">{{ message | raw }}</div>
+        {% endfor %}
+
+        {% for message in app.flashes('errors') %}
+            <div class="alert alert-danger text-center m-3">{{ message  | raw }}</div>
+        {% endfor %}
+
+
+        <!-- ce block sert a insérer le contenu principal de la page -->
+    {% block content %}
+    {% endblock %}
+    </div>
+
+
+    <!-- Menu en bas de page -->
+    <footer class="fixed-bottom fond-principal  text-white">
+        <div class="d-flex justify-content-around my-1">
+
+            <!-- bouton J'apprends -->
+            <a href="{{path("learn")}}">
+                <div class="text-white {% block learn_color %}{% endblock %}">
+                    <i class="fas fa-book-open d-flex justify-content-center"></i>
+                    <small class="d-flex align-items-start">J'apprends</small>
+                </div>
+            </a>
+
+            <!-- bouton Je m'évalue -->
+            <a href="{{path("evaluate")}}">
+                <div class="text-white {% block evaluate_color %}{% endblock %}">
+                    <i class="fas fa-bookmark d-flex justify-content-center"></i>
+                    <small class="d-flex align-items-start">Je m'évalue</small>
+                </div>
+            </a>
+
+            <!-- bouton Actualités -->
+            <a href="{{path("news")}}">
+                <div class="text-white {% block news_color %}{% endblock %}">
+                    <i class="far fa-newspaper d-flex justify-content-center"></i>
+                    <small class="d-flex align-items-start">Actualités</small>
+                </div>
+            </a>
+
+            <!-- bouton Centres -->
+            <a href="{{path("unit")}}">
+                <div class="text-white {% block unit_color %}{% endblock %}">
+                    <i class="far fa-compass d-flex justify-content-center"></i>
+                    <small class="d-flex align-items-start">Centres</small>
+                </div>
+            </a>
+
+            <!-- bouton Profil -->
+            
+            
+                
+{# Si l'utilisateur est connecté, le bouton profile le redirige vers son profil. Sinon il le redirige vers la page de connexion #}
+            <a href="
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{path("profil")}}
+            {% else %}
+            {{path("app_login")}}
+            {% endif %}
+            ">
+                <div class="text-white {% block user_color %}{% endblock %}">
+                    <i class="far fa-user d-flex justify-content-center"></i>
+                    <small class="d-flex align-items-start">Profil</small>
+                </div>
+            </a>
+
+
+        </div>            
+            
+    </footer>
+
+    </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
