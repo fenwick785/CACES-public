@@ -288,6 +288,8 @@ class LearnController extends AbstractController
                 $request->query->getInt('page', 1), // par défaut on se positionne a la page 1
                 1 // on souhaite afficher qu'une seule question par page
             );
+
+            
             
             return $this->render('learn/learn_test.html.twig', [
                 'learn' => $testLearn,
