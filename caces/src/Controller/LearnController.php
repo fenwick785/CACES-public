@@ -267,6 +267,9 @@ class LearnController extends AbstractController
             'user' => $user,
         ]);
 }
+
+
+
         /**
          * @route("/learn/prenium/test/{id}", name="learn_test")
          */
@@ -294,6 +297,14 @@ class LearnController extends AbstractController
             return $this->render('learn/learn_test.html.twig', [
                 'learn' => $testLearn,
             ]);
+        }
+
+
+        /**
+         * @route("/learn/prenium/test/{id}/{answer}", name="learn_test_answer")
+         */
+        public function learnTestAnswer($id, $answer){
+            
         }
 
         /**

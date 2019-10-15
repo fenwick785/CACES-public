@@ -25,29 +25,26 @@ Test {% endblock %}
           id de la question : {{l.id}}
           <br>
           learnTheme : {{l.learnTheme}}
+          <br>
+          réponse : {{l.answer}}
+          <br>
+          correction : {{l.correction}}
         </small>
 
 
-<form action="" method="POST">
 
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="answer" id="exampleRadios1" value="1" checked>
-        <label class="form-check-label" for="exampleRadios1">
-          Vrai
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="answer" id="exampleRadios2" value="0">
-        <label class="form-check-label" for="exampleRadios2">
-          Faux
-        </label>
-      </div>
+<div class="d-flex justify-content-around">
 
-      <input type="submit" class="btn btn-success" value="Valider la réponse">
+  <a href="{{path('learn_test', {'id': l.learnTheme}, {'param' : 'vrai'})}}">vrai</a>
 
-</form>
+  <a href="{{path('learn_test', {'id': l.learnTheme}, {'param' : 'faux'})}}">faux</a>
+
+<button type="button" class="btn-lg btn btn-success" >Vrai</button>
+<button type="button" class="btn btn-lg btn-danger" >Faux</button>
 
 
+
+</div>
 
 
     </div>

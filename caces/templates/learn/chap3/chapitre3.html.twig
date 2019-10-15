@@ -45,8 +45,11 @@
 {% endfor %}
 {% if e == false %}
 <a href="{{path('lesson', {'id': l.id})}}">
-    <div class="col-md-4 offset-md-4 btn learn-color text-white mb-2">
-        {{l.part}} - {{l.title}}
+    <div class="col-md-4 offset-md-4 btn d-flex learn-color text-white mb-2">
+        <div class="w-75">
+            {{l.part}} - {{l.title}} </div>
+            <div class="w-25 d-flex justify-content-end align-items-center">
+                <i class="far" style="font-size: 1.7em;"></i></div>
     </div>
     </a> 
 {% endif %}
