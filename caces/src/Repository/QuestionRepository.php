@@ -61,10 +61,6 @@ class QuestionRepository extends ServiceEntityRepository
             -> getResult();
     }
 
-
-
-    // pour les questions sur les leçons
-
     public function findQuestionLearn($v){
         return $this->createQueryBuilder('l')
             -> andWhere("l.learnTheme = $v")

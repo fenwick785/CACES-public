@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block color %}admin-color{% endblock %}
+
+{% block title %}Liste utilisateurs{% endblock %}
+
+{% block content %}
+
+
+    <h1>Liste des utilisateurs
+    </h1><hr>
+    <div class="table-responsive">
+        <table class="table text-center table-bordered table-dark table-striped">
+            <thead class="font-weight-bold">
+                <tr>
+                    <th class="font-weight-bold">id user</th>
+                    <th>E-mail</th>
+                    <th>Prenom</th>
+                    <th>nom</th>
+                    <th>genre</th>
+                    <th>role</th>
+                    <th colspan="2">action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for u in user %}
+                    <tr>
+                        <td>{{u.id}}</td>
+                        <td>{{u.email}}</td>
+                        <td>{{u.firstName}}</td>
+                        <td>{{u.lastName}}</td>
+                        <td>{{u.role}}</td>
+                        <td>
+                            <a href="{{ path('admin_user_delete',{id:u.id})}}" onclick="return confirm('Etes vous sur de vouloir supprimer le membre?')">
+                                <i class="fas fa-trash-alt text-white"></i>
+                            </a>
+                        </td>
+                        <td>
+                             <a href="{{ path('admin_user_update', {id:u.id}) }}">
+                                <i class="fas fa-edit text-white"></i>
+                            </a> 
+                        </td>
+                        {# <a href="{{ path('admin_user_fiche',{id:u.id}) }}"><i class="fas fa-glasses"></i></a> #}
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    <br>
+{% endblock %}

@@ -196,93 +196,7 @@ crossorigin=""/>
             "site": "http://www.formation-socotec.fr/", 
             "tel": "01 30 12 80 00"},
 
-
-            //  PROVINCE  
-        "ACRONIS" : { 
-            "lat": 46.100279, 
-            "lon": 4.858471, 
-            "adresse": "699 Route de Montessuy 01990 CHANEINS", 
-            "site": "http://www.acronis-formation.fr/", 
-            "tel": "04 74 55 85 84"},
-
-        "BOYER FORMATION" : { 
-            "lat": 43.922327, 
-            "lon": 5.908599, 
-            "adresse": "Font de Durance 04700 ORAISON", 
-            "site": "http://www.boyer-formation.com", 
-            "tel": "04 92 78 75 18"},
-
-        "ECF VIGIER (MONTLUCON)" : { 
-            "lat": 46.385152, 
-            "lon": 4.914812, 
-            "adresse": "Impasse en Chossagne 01190 OZAN", 
-            "site": "https://www.ecf.asso.fr/Auto-ecole/Vigier/ECF-VIGIER-MONTLUCON", 
-            "tel": "04 70 09 09 09"},
-
-        "LS FORMATION / ACTO FORMATION" : { 
-            "lat": 46.366351, 
-            "lon": 2.619722, 
-            "adresse": "9 Rue Jean BONNICHON ZA DU MAX 03630 DESERTINES", 
-            "site": "https://www.actoformation.com/", 
-            "tel": "04 70 08 10 80"},
-
-        "BTP CFA DES ARDENNES" : { 
-            "lat": 49.643474, 
-            "lon": 4.634483, 
-            "adresse": "134 Grande Rue 08430 POIX TERRON", 
-            "site": "https://www.btpcfa-champagneardenne.fr/Poix-Terron_a112.html", 
-            "tel": "03 24 37 34 34"},
-
-        "SNC URANO" : { 
-            "lat": 49.766999, 
-            "lon": 4.652797, 
-            "adresse": "rue François Urano 08000 WARCQ", 
-            "site": "http://www.urano.fr/", 
-            "tel": "03 24 56 29 39"},
-
-        "BC BTP" : { 
-            "lat": 43.239141, 
-            "lon": 1.564091, 
-            "adresse": "Borda 09700 SAVERDUN", 
-            "site": "http://www.bcbtp.com/", 
-            "tel": "05 61 60 32 26"},
-
-        "CITY PRO - CESR 66 (NARBONNE)" : { 
-            "lat": 43.157061, 
-            "lon": 2.985336, 
-            "adresse": "Croix Sud - 10 Av. Forum - 11100 NARBONNE", 
-            "site": "https://city-pro.info/qui-sommes-nous/nos-agences/item/175-narbonne", 
-            "tel": "04 68 27 11 11"},
-
-        "ECF ARIEGE" : { 
-            "lat": 43.116329, 
-            "lon": 1.610060, 
-            "adresse": "ZA de Pic,33 rue des carmes 09100 Pamiers", 
-            "site": "https://www.ecf.asso.fr/Auto-ecole/Ariege", 
-            "tel": "04 91 32 31 00"},
-
-        "ECF FTGR" : { 
-            "lat": 44.279315, 
-            "lon": 2.469996, 
-            "adresse": "ZA du Miral RN88 12160 BARAQUEVILLE", 
-            "site": "https://www.ecf.asso.fr/Auto-ecole/Aveyron-Lot-Tarn/ECF-Baraqueville-BARAQUEVILLE", 
-            "tel": "05 65 69 12 18"},
-
-        "ELIT - AUTO ECOLE DES REMPARTS" : { 
-            "lat": 44.313294, 
-            "lon": 2.558043, 
-            "adresse": "La Boissonnade 12450 LA PRIMAUBE", 
-            "site": "http://www.groupe-elit.com/", 
-            "tel": "05 65 42 61 24"},
-
-        "FORGET FORMATION II" : { 
-            "lat": 48.323122, 
-            "lon": 4.070001, 
-            "adresse": "Route de Culoison Fouchy 10600 LA CHAPELLE SAINT LUC", 
-            "site": "https://www.forget-formation.com/nos-centres-de-formation/centre-de-formation-troyes-10", 
-            "tel": "03 25 81 00 31"},
-
-        "AFTRAL" : { 
+            "AFTRAL" : { 
             "lat": 49.196444, 
             "lon": -0.403091, 
             "adresse": "6, rue de la Cotonnière 14000 CAEN", 
@@ -698,7 +612,7 @@ crossorigin=""/>
 // ici on boucle notre tableau "villes" qui contient tout les centres de formation avec leurs informations
     for(ville in villes){
         var marqueur = L.marker([villes[ville].lat, villes[ville].lon]).addTo(mymap);
-    marqueur.bindPopup("<h5>"+ville+"</h5><hr><ul><li><b>Adresse</b>: "+villes[ville].adresse+"</li></ul>")
+    marqueur.bindPopup("<h5>"+ville+"</h5><hr><ul><li>Adresse: "+villes[ville].adresse+"</li></ul>")
     }
 
     

@@ -35,10 +35,18 @@ class UserType extends AbstractType
             ]
             ]);
             
-            // ->add('role')
+
+            if ($options['action'] == 'admin') {
+
+            $builder
+            ->add('role', ChoiceType::class, [
+                'label' => 'Quel est le rôlr de l\'utilisateur',
+                'choices' => ['User' => 'ROLE_USER', 'Administrateur' => 'ROLE_ADMIN'],
+            ]);
+        }
 
 
-            if ($options['action'] == true) {
+            if ($options['action'] == 'register') {
                 
             $builder
             ->add('password', RepeatedType::class, [

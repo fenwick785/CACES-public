@@ -12,6 +12,11 @@
 
 <a href="{{path("profil_update")}}" type="button" class="btn btn-primary col-md-4 offset-md-4 mb-3">Modifier votre profil</a>
 
+{% if app.user.role == 'ROLE_ADMIN' %}
+
+
+<a href="{{path("admin_user_list")}}" type="button" class="btn btn-dark col-md-4 offset-md-4 mb-3">admin</a>
+{% endif %}
 
 <h6 class="text-center bg-success p-3 text-white" data-toggle="collapse" data-target="#collapsefinish" aria-expanded="false" aria-controls="collapsefinish" type="button">
     Votre liste de leçon(s) terminée(s)<i class="fas fa-caret-down float-right"></i>

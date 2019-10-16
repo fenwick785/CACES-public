@@ -267,9 +267,6 @@ class LearnController extends AbstractController
             'user' => $user,
         ]);
 }
-
-
-
         /**
          * @route("/learn/prenium/test/{id}", name="learn_test")
          */
@@ -291,20 +288,10 @@ class LearnController extends AbstractController
                 $request->query->getInt('page', 1), // par défaut on se positionne a la page 1
                 1 // on souhaite afficher qu'une seule question par page
             );
-
-            
             
             return $this->render('learn/learn_test.html.twig', [
                 'learn' => $testLearn,
             ]);
-        }
-
-
-        /**
-         * @route("/learn/prenium/test/{id}/{answer}", name="learn_test_answer")
-         */
-        public function learnTestAnswer($id, $answer){
-            
         }
 
         /**

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block color %}admin-color{% endblock %}
+
+{% block title %}modifier profil{% endblock %}
+
+{% block content %}
+
+    {{ form_start(userForm) }}
+		{# <form class="form"> #}
+		<div class="row">
+					
+					
+					
+				<div class="row">
+					<div class="col-6">
+					{{ form_row(userForm.firstName) }}
+					</div>
+					<div class="col-6">
+							{{ form_row(userForm.lastName) }}
+					</div>
+				</div>
+						{{ form_row(userForm.email) }}
+				
+			
+				{# {{ form_row(userForm.password) }} #}
+				
+			
+		</div>
+		<div class="row">
+			<div class="col-12">
+			 {{ form_row(userForm.role)}}
+			 </div>
+		</div>
+
+		</div>
+
+				 {{ form_row(userForm.submit, { 'label' : action } ) }} 
+			</div>
+		
+		
+
+    {# </form> #}
+	{{ form_end(userForm) }}
+
+{% endblock %}

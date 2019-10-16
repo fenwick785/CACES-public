@@ -21,7 +21,7 @@ class UserController extends AbstractController
         try {
             $user = new User; //objet vide
             // On récupère le formulaire
-            $form = $this->createForm(UserType::class, $user);
+            $form = $this->createForm(UserType::class, $user, ['action' => 'register']);
             // On récupère les infos saisies dans le formulaire ($_POST)
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -65,7 +65,7 @@ class UserController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $user = $manager->find(User::class, $user);
 
-        $form = $this -> createForm(UserType::class, $user, ['action' => false]);
+        $form = $this -> createForm(UserType::class, $user);
 
         $password = $user->getPassword();
         $form->handleRequest($request);
