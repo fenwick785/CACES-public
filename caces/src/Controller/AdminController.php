@@ -59,7 +59,6 @@ class AdminController extends AbstractController
     /**
      * @route("admin/user/update{id}", name="admin_user_update")
      */
-
     public function adminUserUpdate($id, Request $request)
     {
 

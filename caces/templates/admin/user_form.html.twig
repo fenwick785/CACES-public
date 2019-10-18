@@ -7,23 +7,34 @@
 {% block content %}
 
     {{ form_start(userForm) }}
-		{# <form class="form"> #}
-		<div class="row">
-					
-					
-					
-				<div class="row">
-					<div class="col-6">
-					{{ form_row(userForm.firstName) }}
-					</div>
-					<div class="col-6">
-							{{ form_row(userForm.lastName) }}
-					</div>
+		<form class="form">
+			<div class="">
+				<div class="row mt-2">
+					<div class="col-5">{{ form_label(userForm.firstName) }}</div > 
+					<div class="col-5"> {{ form_label(userForm.lastName) }}</div>
 				</div>
-						{{ form_row(userForm.email) }}
+				<div class="row">
+					<div class="col-5 text-danger">{{ form_errors(userForm.firstName) }}</div>
+					<div class="col-5 text-danger">{{ form_errors(userForm.lastName) }}</div> 
+		
+					
+				</div>
+				<div class="row">
+					<div class="col-5">{{ form_widget(userForm.firstName) }}</div>
+					<div class="col-5">{{ form_widget(userForm.lastName) }}</div> 
+				</div>
 				
-			
-				{# {{ form_row(userForm.password) }} #}
+				<div class="row mt-2">
+					<div class="col-6">{{ form_label(userForm.email) }}</div>
+				</div>
+				<div class="row">
+					<div class="col-6 text-danger">{{ form_errors(userForm.email) }}</div>
+				</div>
+				<div class="row">
+					<div class="col-12">{{ form_widget(userForm.email) }}</div>
+				</div>
+				<br>
+				<hr>
 				
 			
 		</div>
@@ -32,15 +43,16 @@
 			 {{ form_row(userForm.role)}}
 			 </div>
 		</div>
+		<br>
+		<hr>
 
-		</div>
-
+			
 				 {{ form_row(userForm.submit, { 'label' : action } ) }} 
-			</div>
+			
 		
 		
 
-    {# </form> #}
+    </form>
 	{{ form_end(userForm) }}
 
 {% endblock %}

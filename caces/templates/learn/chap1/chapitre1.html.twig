@@ -15,10 +15,35 @@
 
 
 {% for l in lesson %}
+
 {% set e = false %}
+
+
+
+
+
 {% for ul in userLessonComprise %}
+
+
+
+
+
+
 {% if l.id == ul.idLesson.id and ul.state == 'comprises' %} 
+
+
+
+
+
+
 {% set e = true %}
+
+
+
+
+
+
+
 <a href="{{path('lesson', {'id': l.id})}}">
     <div class="col-md-4 offset-md-4 d-flex btn learn-color text-white mb-2">
         <div class="w-75">

@@ -22,3 +22,10 @@
     background: #39B54A !important;
 }
 
+.admin-color{
+    background: rgb(46, 46, 46) !important;
+}
+
+.not-view{
+    font-size: 1px;
+}

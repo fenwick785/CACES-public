@@ -17,46 +17,107 @@ Test {% endblock %}
 
 <div>
   <img src="{{l.picture}}" alt="" class="w-100 mb-2">
-        <p>{{l.question}}</p>
+  <p>{{l.question}}</p>
 
-        <small>
-          id de la question : {{l.id}}
-          <br>
-          learnTheme : {{l.learnTheme}}
-        </small>
+  <small>
+    id de la question : {{l.id}}
+    <br>
+    learnTheme : {{l.learnTheme}}
+    <br>
+    réponse : {{l.answer}}
+  </small>
 
+  <!-- Si la réponse est 1 (vrai) alors on donne a notre variable JS 'answer' la valeur 'vrai' -->
+  {% if l.answer == 1 %}
+  <script>
+    var answer = 'vrai';
+  </script>
+  {% endif %}
 
-<form action="" method="POST">
+  <!-- Si la réponse est différent de 1 (faux) alors on donne a notre variable JS 'answer' la valeur 'faux' -->
+  {% if l.answer != 1 %}
+  <script>
+    var answer = 'faux';
+  </script>
+  {% endif %}
 
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="answer" id="exampleRadios1" value="1" checked>
-        <label class="form-check-label" for="exampleRadios1">
-          Vrai
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="answer" id="exampleRadios2" value="0">
-        <label class="form-check-label" for="exampleRadios2">
-          Faux
-        </label>
-      </div>
-
-      <input type="submit" class="btn btn-success" value="Valider la réponse">
-
-</form>
-
-
+  <script>
+    console.log(answer)
+  </script>
 
 
-    </div>
-    <hr>
-    
+
+  <div class="d-flex justify-content-around">
+    <button type="button" id='vrai' class="btn btn-lg btn-success">Vrai</button>
+    <button type="button" id='faux' class="btn btn-lg btn-danger">Faux</button>
+  </div>
+</div>
+
+
+<script>
+  function reponse1() {
+    // en cas de bonne réponse, on sélectionne la réponse avec la class ".bonne" et on la rend visible
+      // puis on sélectionne la réponse avec la class ".fausse" et on supprime cette class => c'est une manière de bloquer le script
+      // not-view est une class qui modifie le 'font-size' (ici, la taille de la police) et la diminue a 1px.
+        // => cela permet qu'il n'y ai pas de blanc entre les 2 boutons et la pagination
+        // car les 2 div avec les réponses ne sont juste pas visibles mais sont bien présentes
+      // on supprime la class "not-view" lorsque l'utilisateur a choisi sa réponse
+    if (answer == 'vrai') {
+      console.log('bonne réponse')
+      $('.bonne').removeClass(['invisible', 'not-view']).addClass('visible')
+      $('#vrai').removeClass('btn-success').addClass('btn-dark')
+      $('.fausse').removeClass('fausse')
+    }
+
+    // Inversement
+
+    if (answer == 'faux') {
+      console.log('mauvaise réponse')
+      $('.fausse').removeClass(['invisible', 'not-view']).addClass('visible')
+      $('#vrai').removeClass('btn-success').addClass('btn-dark')
+      $('.bonne').removeClass('bonne')
+    }
+  }
+  // On lance cette fonction lorsque l'utilisateur clique sur le bouton vrai
+  document.getElementById('vrai').addEventListener("click", reponse1)
+
+
+  function reponse2() {
+    if (answer == 'vrai') {
+      console.log('mauvaise réponse')
+      $('.fausse').removeClass(['invisible', 'not-view']).addClass('visible')
+      $('#faux').removeClass('btn-success').addClass('btn-dark')
+      $('.bonne').removeClass('bonne')
+    }
+    if (answer == 'faux') {
+      console.log('bonne réponse')
+      $('.bonne').removeClass(['invisible', 'not-view']).addClass('visible')
+      $('#faux').removeClass('btn-success').addClass('btn-dark')
+      $('.fausse').removeClass('fausse')
+    }
+  }
+  document.getElementById('faux').addEventListener("click", reponse2)
+</script>
+
+
+
+<hr>
+
+<!-- affichage de la réponse a la question -->
+<!-- si la réponse est bonne elle s'affiche dans un background Vert et si elle est fausse, dans un background Rouge -->
+<!-- les deux réponses ont la class invisible, c'est une class bootstrap qui permet de rendre un élément invisible -->
+<!-- les éléments seront visible une fois que l'utilisateur aura donné sa réponse -->
+<div class="bg-success invisible bonne not-view mb-2" id=""><b>Réponse :</b> {{l.correction}}</div>
+<div class="bg-danger invisible fausse not-view mb-2" id=""><b>Réponse :</b> {{l.correction}}</div>
+
 {% endfor %}
 
+
+
 <small class="d-flex justify-content-center">
-    <div class="pagination mw-100">
-        {{ knp_pagination_render(learn) }}
-      </div>
+  <div class="pagination mw-100">
+    {{ knp_pagination_render(learn) }}
+  </div>
 
 </small>
 

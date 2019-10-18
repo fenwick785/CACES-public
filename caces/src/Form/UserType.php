@@ -98,15 +98,17 @@ class UserType extends AbstractType
                         'minMessage' => 'Le nom de famille doit contenir au minimum 2 caractères',
                     ]),
                 ]
-            ])
+            ]);
 
-
+            if ($options['action'] != 'admin'){
+            $builder
             ->add('question', ChoiceType::class, [
                 'label' => 'Je passe le CACES pour la 1ère fois',
                 'choices' => ['Oui' => 1, 'Non' => 0],
-            ])
+            ]);
+            }
 
-
+            $builder
             ->add('submit', SubmitType::class,[
                 'label' => 'Valider',
                 'attr'=>['class'=>'btn btn-danger']
