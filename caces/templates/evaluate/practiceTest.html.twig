@@ -10,28 +10,29 @@ Examen Blanc{% endblock %}
 <h1>1/ Connaissances générales</h1>
 <small>(12 questions)</small>
 <br><br>
-<form action="">
 
 
+<form action="" method="POST">
 {% for q1 in question1 %}
 
-    <div>
-        <p>{{q1.question}}</p>
 
-        <div class="d-flex justify-content-around">
+        <div>
+            <p>{{q1.question}}</p>
 
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
-            <label class="form-check-label" for="inlineRadio1">Vrai</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
-            <label class="form-check-label" for="inlineRadio2">Faux</label>
-          </div>
+            <div class="d-flex justify-content-around">
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{q1.id}}" id="{{q1.id}}" value="1">
+                <label class="form-check-label" for="{{q1.id}}">Vrai</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{q1.id}}" id="{{q1.id}}2" value="">
+                <label class="form-check-label" for="{{q1.id}}2">Faux</label>
+              </div>
+
+            </div>
 
         </div>
-
-    </div>
     <hr>
 
 {% endfor %}
@@ -42,23 +43,22 @@ Examen Blanc{% endblock %}
 <br><br>
 
 {% for q2 in question2 %}
-<div>
-    <p>{{q2.question}}</p>
+        <div>
+            <p>{{q2.question}}</p>
 
-    <div class="d-flex justify-content-around">
+            <div class="d-flex justify-content-around">
 
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
-        <label class="form-check-label" for="inlineRadio1">Vrai</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
-        <label class="form-check-label" for="inlineRadio2">Faux</label>
-      </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{q2.id}}" id="{{q2.id}}" value="1">
+                <label class="form-check-label" for="{{q2.id}}">Vrai</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{q2.id}}" id="{{q2.id}}2" value="">
+                <label class="form-check-label" for="{{q2.id}}2">Faux</label>
+              </div>
 
-    </div>
-
-</div>
+            </div>
+        </div>
 <hr>
 {% endfor %}
 <br>
@@ -69,23 +69,23 @@ Examen Blanc{% endblock %}
 <br><br>
 
 {% for q3 in question3 %}
-<div>
-    <p>{{q3.question}}</p>
+        <div>
+            <p>{{q3.question}}</p>
 
-    <div class="d-flex justify-content-around">
+            <div class="d-flex justify-content-around">
 
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
-        <label class="form-check-label" for="inlineRadio1">Vrai</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
-        <label class="form-check-label" for="inlineRadio2">Faux</label>
-      </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{q3.id}}" id="{{q3.id}}" value="1">
+                <label class="form-check-label" for="{{q3.id}}">Vrai</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{q3.id}}" id="{{q3.id}}2" value="">
+                <label class="form-check-label" for="{{q3.id}}2">Faux</label>
+              </div>
 
-    </div>
+            </div>
 
-</div>
+        </div>
 <hr>
 {% endfor %}
 <br>
@@ -96,22 +96,20 @@ Examen Blanc{% endblock %}
 <br><br>
 
 {% for q4 in question4 %}
+        <p>{{q4.question}}</p>
 
-    <p>{{q4.question}}</p>
+        <div class="d-flex justify-content-around">
 
-    <div class="d-flex justify-content-around">
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="{{q4.id}}" id="{{q4.id}}" value="1">
+            <label class="form-check-label" for="{{q4.id}}">Vrai</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="{{q4.id}}" id="{{q4.id}}2" value="">
+            <label class="form-check-label" for="{{q4.id}}2">Faux</label>
+          </div>
 
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
-        <label class="form-check-label" for="inlineRadio1">Vrai</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
-        <label class="form-check-label" for="inlineRadio2">Faux</label>
-      </div>
-
-    </div>
-
+        </div>
 <hr>
 {% endfor %}
 <br>
@@ -121,27 +119,27 @@ Examen Blanc{% endblock %}
 <br><br>
 
 {% for q5 in question5 %}
-<div>
-    <p>{{q5.question}}</p>
+        <div>
+            <p>{{q5.question}}</p>
 
-    <div class="d-flex justify-content-around">
+            <div class="d-flex justify-content-around">
 
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
-        <label class="form-check-label" for="inlineRadio1">Vrai</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="">
-        <label class="form-check-label" for="inlineRadio2">Faux</label>
-      </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{q5.id}}" id="{{q5.id}}" value="1">
+                <label class="form-check-label" for="{{q5.id}}">Vrai</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="{{q5.id}}" id="{{q5.id}}2" value="">
+                <label class="form-check-label" for="{{q5.id}}2">Faux</label>
+              </div>
 
-    </div>
+            </div>
 
-</div>
+        </div>
+    </form>
 <hr>
 {% endfor %}
 
 <a class="btn col-md-4 offset-md-4 btn-success btn-lg" type="submit" href="#" role="button">Valider mes réponses</a>
-</form>
 
 {% endblock %}

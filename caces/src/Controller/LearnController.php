@@ -20,7 +20,7 @@ class LearnController extends AbstractController
     {
 
         $user = $this->getUser();
-        
+
 
         $learnState = $this
             ->getDoctrine()
@@ -29,12 +29,12 @@ class LearnController extends AbstractController
                 'idUser' => $user,
                 'state' => 'comprises',
             ]);
-        
-        $lesson = $this 
+
+        $lesson = $this
             ->getDoctrine()
             ->getRepository(Lesson::class)
             ->findAll();
-            
+
 
         return $this->render('learn/index.html.twig', [
             'learnState' => $learnState,
@@ -254,11 +254,11 @@ class LearnController extends AbstractController
         $testLearn = $repository -> findQuestionLearn($idLesson);
 
         $userLesson = $this
-                    ->getDoctrine()
-                    ->getRepository(UserLesson::class)
-                    ->findBy([
-                        'idUser' => $user,
-                    ]);
+            ->getDoctrine()
+            ->getRepository(UserLesson::class)
+            ->findBy([
+                'idUser' => $user,
+            ]);
 
         return $this->render('learn/lesson.html.twig', [
             'lesson' => $lesson,
@@ -266,48 +266,48 @@ class LearnController extends AbstractController
             'userLesson' => $userLesson,
             'user' => $user,
         ]);
-}
-        /**
-         * @route("/learn/prenium/test/{id}", name="learn_test")
-         */
-        public function learnTest(PaginatorInterface $paginator, Request $request, $id){
-            $manager = $this->getDoctrine()->getManager();
-            $lesson = $manager->find(Lesson::class, $id);
+    }
+    /**
+     * @route("/learn/prenium/test/{id}", name="learn_test")
+     */
+    public function learnTest(PaginatorInterface $paginator, Request $request, $id){
+        $manager = $this->getDoctrine()->getManager();
+        $lesson = $manager->find(Lesson::class, $id);
 
-            $repository = $this->getDoctrine()->getRepository(Question::class);
-
-
+        $repository = $this->getDoctrine()->getRepository(Question::class);
 
 
-            // la variable $idLesson corerspond a l'idLesson de la leçon en question
-            // l'idLesson correspond au theme de la leçon afin que les questions posées a la fin de la lecon, correspondent a ce qui a été vu au cours de la leçon
-            
-            $idLesson = $lesson->getIdLesson(); // on récupère l'idLesson de la leçon en question
-            $testLearn = $paginator->paginate( // on créé la pagination
-                $repository -> findQuestionLearn($idLesson), // on appel les éléments que l'on souhaite "paginer"
-                $request->query->getInt('page', 1), // par défaut on se positionne a la page 1
-                1 // on souhaite afficher qu'une seule question par page
-            );
-            
-            return $this->render('learn/learn_test.html.twig', [
-                'learn' => $testLearn,
-            ]);
-        }
-
-        /**
-         * @route("/learn/prenium/{id}/{state}", name="learn_finish")
-         */
-        public function learnFinsh($state, $id, ObjectManager $manager){
-
-            $user = $this->getUser();
-            // on récupère les infos sur l'utilisateur connecté
-
-            $lesson = $manager->find(Lesson::class, $id);
-            // on récupère la leçon que l'on souhaite, selon son ID
 
 
-            $listUserAAjouter = $this
-        // On cherche en BDD si il y a une ligne où les champs :
+        // la variable $idLesson corerspond a l'idLesson de la leçon en question
+        // l'idLesson correspond au theme de la leçon afin que les questions posées a la fin de la lecon, correspondent a ce qui a été vu au cours de la leçon
+
+        $idLesson = $lesson->getIdLesson(); // on récupère l'idLesson de la leçon en question
+        $testLearn = $paginator->paginate( // on créé la pagination
+            $repository -> findQuestionLearn($idLesson), // on appel les éléments que l'on souhaite "paginer"
+            $request->query->getInt('page', 1), // par défaut on se positionne a la page 1
+            1 // on souhaite afficher qu'une seule question par page
+        );
+
+        return $this->render('learn/learn_test.html.twig', [
+            'learn' => $testLearn,
+        ]);
+    }
+
+    /**
+     * @route("/learn/prenium/{id}/{state}", name="learn_finish")
+     */
+    public function learnFinsh($state, $id, ObjectManager $manager){
+
+        $user = $this->getUser();
+        // on récupère les infos sur l'utilisateur connecté
+
+        $lesson = $manager->find(Lesson::class, $id);
+        // on récupère la leçon que l'on souhaite, selon son ID
+
+
+        $listUserAAjouter = $this
+            // On cherche en BDD si il y a une ligne où les champs :
             //id_user_id correspond a l'id du user connecté
             //lesson corespond a la leçon avec laquelle on interagie
             //state correspond a l'état que l'on souhaite attribuer a notre leçon (comprise ou non comprise)
@@ -319,8 +319,8 @@ class LearnController extends AbstractController
                 'state' => $state
             ]);
 
-            $listUserAModifier = $this
-        // On cherche en BDD si il y a une ligne où les champs :
+        $listUserAModifier = $this
+            // On cherche en BDD si il y a une ligne où les champs :
             //id_user_id correspond a l'id du user connecté
             //lesson corespond a la leçon avec laquelle on interagie
             ->getDoctrine()
@@ -331,21 +331,21 @@ class LearnController extends AbstractController
 
             ]);
 
-            if ($listUserAAjouter) {
-                // on affiche un message d'erreur comme quoi nous avons déja cette leçon dans notre liste
-                $this->addFlash('errors', 'Cette leçon <b>' . $lesson->getTitle() .  '</b> est déjà dans la liste !');
-            }
-            if ($listUserAModifier) {
-                // on remplace l'état dans le champ state
-                $listUserAModifier->setState($state);
-                $manager->persist($listUserAModifier);
-                $manager->flush();
-                $this->addFlash('success', 'la leçon <b>' . $lesson->getTitle() .  '</b> a changé de liste !');
-            }
-            else{
+        if ($listUserAAjouter) {
+            // on affiche un message d'erreur comme quoi nous avons déja cette leçon dans notre liste
+            $this->addFlash('errors', 'Cette leçon <b>' . $lesson->getTitle() .  '</b> est déjà dans la liste !');
+        }
+        if ($listUserAModifier) {
+            // on remplace l'état dans le champ state
+            $listUserAModifier->setState($state);
+            $manager->persist($listUserAModifier);
+            $manager->flush();
+            $this->addFlash('success', 'la leçon <b>' . $lesson->getTitle() .  '</b> a changé de liste !');
+        }
+        else{
             $userLesson = new UserLesson;
 
-        
+
 
             $userLesson->setIdUser($user);
             $userLesson->setIdLesson($lesson);
@@ -356,25 +356,25 @@ class LearnController extends AbstractController
             $manager->flush();
             $this->addFlash('success','La leçon <b>'.$lesson->getTitle().'</b> est mise dans la liste des leçons '. $state .'!');
 
-            }
-
-            return $this->redirectToRoute('learn', [
-                'id' => $id,
-            ]);
         }
+
+        return $this->redirectToRoute('learn', [
+            'id' => $id,
+        ]);
+    }
 
 
     /**
-    * @Route("/learn/prenium/remove/{id}/{state}", name="learn_remove_list" )
-    */
+     * @Route("/learn/prenium/remove/{id}/{state}", name="learn_remove_list" )
+     */
     public function learnRemoveList($state, $id, ObjectManager $manager)
     {
-        // fonction permettant de supprimer une série de sa liste 
+        // fonction permettant de supprimer une série de sa liste
         $user = $this->getUser();
         $lesson = $manager->find(Lesson::class, $id);
 
         $listUserASupp = $this
-        // On cherche en BDD si il y a une ligne où les champs :
+            // On cherche en BDD si il y a une ligne où les champs :
             //id_user_id correspond a l'id du user connecté
             //serie_id corespond a l'id de la série avec laquelle on interagie
             //state correspond a l'état que l'on souhaite attribuer a notre série

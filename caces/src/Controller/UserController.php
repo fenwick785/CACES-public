@@ -33,6 +33,7 @@ class UserController extends AbstractController
                 // on encode selon l'algo choisi dans security.yaml
                 $password_crypte = $encoder->encodePassword($user, $password);
                 $user->setPassword($password_crypte);
+                $user->setResetToken("");
                 $manager->flush();
                 // va enregistrer $user en BDD
                 $this->addFlash('success', 'Votre compte a bien été créé');

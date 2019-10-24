@@ -34,7 +34,7 @@ class UserType extends AbstractType
                     ])
             ]
             ]);
-            
+
 
             if ($options['action'] == 'admin') {
 
